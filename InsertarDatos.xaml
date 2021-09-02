@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1335,1466</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1335,2064</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>InsertarDatosTRM_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="28">
@@ -75,14 +75,14 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InsertarDatosTRM" sap:VirtualizedContainerService.HintSize="476,1301" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InsertarDatosTRM" sap:VirtualizedContainerService.HintSize="1040,1899" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,93" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Insertar Datos Indicadores: INICIO&quot;]" />
-    <TryCatch DisplayName="Persistir Resultado" sap:VirtualizedContainerService.HintSize="434,943" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="998,93" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Insertar Datos Indicadores: INICIO&quot;]" />
+    <TryCatch DisplayName="Persistir Resultado" sap:VirtualizedContainerService.HintSize="998,1541" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -90,7 +90,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence DisplayName="Registro en base de datos" sap:VirtualizedContainerService.HintSize="725,1107" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Registro en base de datos" sap:VirtualizedContainerService.HintSize="960,1309" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Int32" Name="iTmpCant" />
             <Variable x:TypeArguments="ui:DatabaseConnection" Name="sqlConnection" />
@@ -103,29 +103,43 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DatabaseConnect DatabaseConnection="[sqlConnection]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="683,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="Dsn=Mysql-DatosChile" />
-          <If Condition="[in_boolSuccess]" sap:VirtualizedContainerService.HintSize="683,668" sap2010:WorkflowViewState.IdRef="If_1">
+          <ui:DatabaseConnect DatabaseConnection="[sqlConnection]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="918,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.Odbc" ConnectionString="Dsn=Mysql-DatosChile" />
+          <If Condition="[in_boolSuccess]" sap:VirtualizedContainerService.HintSize="918,828" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,508" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence sap:VirtualizedContainerService.HintSize="611,668" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">[strInsert]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">["INSERT INTO INDICADORES (FECHA_INSERCION, FECHA_CONSULTA, DOLAR_OBSERVADO, UNIDAD_FOMENTO) VALUES ('"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"', '"+date.Now.ToString("yyyy-MM-dd")+"', "+in_dicValues("DOLAR")+", "+in_dicValues("UNIDAD")+");"]</InArgument>
-                  </Assign.Value>
-                </Assign>
-                <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" Sql="[strInsert]">
+                <If Condition="[in_dicValues(&quot;DOLAR&quot;).Equals(&quot;ND&quot;)]" sap:VirtualizedContainerService.HintSize="569,220" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strInsert]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">["INSERT INTO INDICADORES (FECHA_INSERCION, FECHA_CONSULTA, DOLAR_OBSERVADO, UNIDAD_FOMENTO) VALUES ('"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"', '"+date.Now.ToString("yyyy-MM-dd")+"', 0, "+in_dicValues("UNIDAD")+");"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </If.Then>
+                  <If.Else>
+                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strInsert]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">["INSERT INTO INDICADORES (FECHA_INSERCION, FECHA_CONSULTA, DOLAR_OBSERVADO, UNIDAD_FOMENTO) VALUES ('"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"', '"+date.Now.ToString("yyyy-MM-dd")+"', "+in_dicValues("DOLAR")+", "+in_dicValues("UNIDAD")+");"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </If.Else>
+                </If>
+                <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="569,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" Sql="[strInsert]">
                   <ui:ExecuteNonQuery.Parameters>
                     <scg:Dictionary x:TypeArguments="x:String, Argument" />
                   </ui:ExecuteNonQuery.Parameters>
                 </ui:ExecuteNonQuery>
-                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_4">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[strUpdate]</OutArgument>
                   </Assign.To>
@@ -133,7 +147,7 @@
                     <InArgument x:TypeArguments="x:String">["UPDATE INDICADORES_RESUMEN_EJECUCION SET RESUMEN_FECHA_FIN_EJECUCION='"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"',RESUMEN_RESULTADO='OK' WHERE idRESUMEN_EJECUCION = (SELECT ID FROM (SELECT MAX(idRESUMEN_EJECUCION) AS ID FROM INDICADORES_RESUMEN_EJECUCION) AS TMP)"]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" Sql="[strUpdate]">
+                <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="569,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" Sql="[strUpdate]">
                   <ui:ExecuteNonQuery.Parameters>
                     <scg:Dictionary x:TypeArguments="x:String, Argument" />
                   </ui:ExecuteNonQuery.Parameters>
@@ -151,7 +165,7 @@
               </Assign>
             </If.Else>
           </If>
-          <Assign sap:VirtualizedContainerService.HintSize="683,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign sap:VirtualizedContainerService.HintSize="918,60" sap2010:WorkflowViewState.IdRef="Assign_5">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[strUpdate]</OutArgument>
             </Assign.To>
@@ -159,19 +173,19 @@
               <InArgument x:TypeArguments="x:String">["UPDATE INDICADORES_RESUMEN_EJECUCION SET RESUMEN_DURACION_SEGUNDOS = TIMESTAMPDIFF(SECOND,RESUMEN_FECHA_INICIO_EJECUCION,RESUMEN_FECHA_FIN_EJECUCION) WHERE idRESUMEN_EJECUCION = (SELECT ID FROM (SELECT MAX(idRESUMEN_EJECUCION) AS ID FROM INDICADORES_RESUMEN_EJECUCION) AS TMP)"]</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="683,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" Sql="[strUpdate]">
+          <ui:ExecuteNonQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" AffectedRecords="[iTmpCant]" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnection]" sap:VirtualizedContainerService.HintSize="918,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" Sql="[strUpdate]">
             <ui:ExecuteNonQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteNonQuery.Parameters>
           </ui:ExecuteNonQuery>
-          <ui:DatabaseDisconnect DatabaseConnection="[sqlConnection]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="683,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+          <ui:DatabaseDisconnect DatabaseConnection="[sqlConnection]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="918,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,777" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="964,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -197,7 +211,7 @@
                   <OutArgument x:TypeArguments="x:String">[strUpdateError]</OutArgument>
                 </Assign.To>
                 <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">["UPDATE INDICADORES_RESUMEN_EJECUCION SET RESUMEN_FECHA_FIN_EJECUCION='"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"',RESUMEN_RESULTADO='ERROR', RESUMEN_EXCEPCION='"+exception.Message+"' WHERE idRESUMEN_EJECUCION = (SELECT ID FROM (SELECT MAX(idRESUMEN_EJECUCION) AS ID FROM INDICADORES_RESUMEN_EJECUCION) AS TMP)"]</InArgument>
+                  <InArgument x:TypeArguments="x:String">["UPDATE INDICADORES_RESUMEN_EJECUCION SET RESUMEN_FECHA_FIN_EJECUCION='"+date.Now.ToString("yyyy-MM-dd HH:mm:ss")+"',RESUMEN_RESULTADO='ERROR', RESUMEN_EXCEPCION='"+exception.Message.Replace("'","")+"' WHERE idRESUMEN_EJECUCION = (SELECT ID FROM (SELECT MAX(idRESUMEN_EJECUCION) AS ID FROM INDICADORES_RESUMEN_EJECUCION) AS TMP)"]</InArgument>
                 </Assign.Value>
               </Assign>
               <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[sqlConnectionError]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" Sql="[strUpdateError]">
@@ -211,6 +225,6 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,93" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Insertar Datos Indicadores: FIN&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="998,93" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Insertar Datos Indicadores: FIN&quot;]" />
   </Sequence>
 </Activity>
